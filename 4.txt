@@ -1,0 +1,51 @@
+Q1. 10M
+
+matrix1 = matrix(c(3, 9, -1, 4, 2, 6), nrow = 2)
+
+print(matrix1)
+
+matrix2 = matrix(c(5, 2, 0, 9, 3, 4), nrow = 2)
+
+print(matrix2)
+
+result = matrix1 + matrix2
+
+cat("Result of addition is:\n")
+
+print(result)
+
+
+Q2. 20M
+
+import numpy as np
+import matplotlib.pyplot as plt
+import pandas as pd
+import sklearn
+from sklearn.preprocessing import LabelEncoder
+from sklearn.naive_bayes import GaussianNB
+
+weather = ['Sunny', 'Sunny', 'Overcast', 'Rainy', 'Rainy', 'Rainy' ,'Overcast', 'Sunny', 'Sunny', 'Rainy','Sunny', 'Overcast','Overcast', 'Rainy']
+
+temp = ['Hot', 'Hot', 'Hot', 'Mild', 'Cool', 'Cool', 'Cool', 'Mild','Cool', 'Mild', 'Mild', 'Mild', 'Hot', 'Mild']
+
+play = ['No', 'No', 'Yes', 'Yes', 'Yes', 'No', 'Yes', 'No', 'Yes','Yes', 'Yes', 'Yes', 'Yes', 'No']
+
+le = LabelEncoder()
+
+w_encode = le.fit_transform(weather)
+print ("weather:", w_encode)
+
+t_encode=le.fit_transform(temp)
+print ("Temp: ", t_encode)
+
+label = le.fit_transform(play)
+print("Play:", label)
+
+features = list (zip (w_encode, t_encode))
+print (features)
+
+classifier = GaussianNB()
+classifier.fit(features, label)
+predicted = classifier.predict([[0, 2]])
+
+print("Predicted value : ",predicted)

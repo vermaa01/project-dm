@@ -1,0 +1,48 @@
+Q1. 10M
+
+numbers <- 20:50
+
+cat("Sequence of numbers from 20 to 50:\n", numbers)
+
+mean_value <- mean(20:60)
+
+cat("Mean of numbers from 20 to 60:", mean_value)
+
+sum_value <- sum(51:91)
+
+cat("Sum of numbers from 51 to 91:", sum_value)
+
+
+Q2. 20M
+
+import numpy as np
+from sklearn.linear_model import LinearRegression
+from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
+
+x = np.array([1, 2, 3, 4, 5, 6, 7, 8]).reshape(-1, 1)
+
+y = np.array([7, 14, 15, 18, 19, 21, 26, 23])
+
+model = LinearRegression().fit(x, y)
+
+pred = model.predict(x)
+
+b0 = model.intercept_
+
+b1 = model.coef_[0]
+
+mae = mean_absolute_error(y, pred)
+
+mse = mean_squared_error(y, pred)
+
+rmse = np.sqrt(mse)
+
+r2 = r2_score(y, pred)
+
+print("b0:", b0)
+print("b1:", b1)
+
+print("Mean Asolute Error:", mae)
+print("Mean Squared Error:", mse)
+print("Root Mean Squared Error:", rmse)
+print("R2:", r2)
