@@ -1,0 +1,52 @@
+Q1. 10M
+
+a = c(10,20,30,40)
+
+b = c(20,30,40,50)
+
+print("Original Vectors")
+
+print(a)
+
+print(b)
+
+print("After Calculation")
+
+print(a + b)
+
+print(a * b)
+
+print(a / b)
+
+
+Q2. 20M (CSV)
+
+import pandas as pd
+import numpy as np
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LinearRegression
+from sklearn import metrics
+
+df = pd.read_csv("studentscores.csv")
+
+num = df.select_dtypes(include = [np.number])
+
+if num.shape[1] < 2: raise ValueError("Need at least two numeric columns")
+
+x = num.iloc[:, :-1]
+y = num.iloc[:, -1]
+
+x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.2, random_state=42)
+
+model = LinearRegression().fit(x_train, y_train)
+
+y_pred = model.predict(x_test)
+
+mae = metrics.mean_absolute_error(y_test, y_pred)
+mse = metrics.mean_squared_error(y_test, y_pred)
+rmse = np.sqrt(mse)
+
+print("Mean Absolute Error:", mae)
+print("Mean Squared Error:", mse)
+print("Root Mean Squared Error:", rmse)
+

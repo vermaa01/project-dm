@@ -1,0 +1,21 @@
+Q1. 10M
+
+dice <- c(1, 2, 3, 4, 5, 6)
+
+frequency <- c(7, 2, 6, 3, 4, 8)
+
+labels <- paste("Dice", dice, "\nFreq:", frequency)
+
+pie(frequency, labels = labels, main = "Frequency of Dice Numbers", col = rainbow(length(frequency)))
+
+
+Q2. 20M (CSV)
+
+import pandas as pd
+
+df = pd.read_csv("StudentsPerformance.csv")
+
+print("Shape of the dataset:", df.shape)
+
+print("\nTop 5 rows of the dataset:")
+print(df.head())

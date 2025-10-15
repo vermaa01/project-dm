@@ -1,0 +1,47 @@
+Q1. 10M
+
+vec <- c(12, 45, 7, 23, 89, 34, 56)
+
+cat("Vector Elements:", toString(vec), "\n")
+
+max_value <- max(vec)
+
+cat("Maximum value of the vector:", max_value, "\n")
+
+min_value <- min(vec)
+
+cat("Minimum value of the vector:", min_value, "\n")
+
+
+Q2. 20M (CSV)
+
+import numpy as np
+from apyori import apriori
+import pandas as pd
+
+dataset = pd.read_csv("Iris.csv")
+
+dataset.head()
+
+np.shape(dataset)
+
+records=[]
+
+for i in range(0,150): records.append([str(dataset.values[i,j]) for j in range(0,5)])
+
+rules = apriori(records,min_support = 0.003, min_confidence = 0.2, min_lift = 3, min_length = 2, max_length = 2)
+
+results = list(rules)
+
+print(len(results))
+
+print(results[0])
+
+for item in results: pair = item[0]
+
+items = [x for x in pair]
+
+print("Rules: " + items[0] + "->" + items[1])
+print("Support: " + str(item[2][0][2]))
+print("Lift: " + str(item[2][0][3]))
+print("========================================================")

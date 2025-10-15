@@ -1,0 +1,43 @@
+Q1. 10M
+
+a = c(10,20,30,40)
+
+b = c(20,30,40,50)
+
+print("Original Vectors")
+
+print(a)
+
+print(b)
+
+print("After Calculation")
+
+print(a + b)
+
+print(a * b)
+
+print(a / b)
+
+
+Q2. 20M (CSV)
+
+import pandas as pd
+from sklearn.tree import DecisionTreeClassifier
+
+data = pd.read_csv("shows.csv")
+
+data['nationality'] = data['nationality'].map({'American': 0, 'British': 1, 'Canadian': 2})
+
+X = data[['age', 'nationality', 'experience', 'ranking']]
+
+y = data['class']
+
+clf = DecisionTreeClassifier()
+
+clf = clf.fit(X, y)
+
+new_show = [[40, 0, 10, 7]]
+
+prediction = clf.predict(new_show)
+
+print(f"Predicted class for the new show: {prediction[0]}")

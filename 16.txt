@@ -1,0 +1,61 @@
+Q1. 10M
+
+Year <- c("2001", "2002", "2003")
+
+Export <- c(26, 32, 35)
+
+Import <- c(35, 40, 50)
+
+data <- rbind(Export, Import)
+
+barplot(
+  data,
+  beside = TRUE,
+  names.arg = Year,
+  col = c("steelblue", "tomato"),
+  main = "Export and Import by Year",
+  xlab = "Year",
+  ylab = "Trade Value",
+  ylim = c(0, 60)
+)
+
+legend("topleft",
+       legend = c("Export", "Import"),
+       fill = c("steelblue", "tomato"),
+       bty = "n")
+
+bp <- barplot(
+  data,
+  beside = TRUE,
+  names.arg = Year,
+  col = c("steelblue", "tomato"),
+  ylim = c(0, 60),
+  add = TRUE
+)
+
+text(x = bp, y = data + 2, labels = data, cex = 0.8)
+
+
+Q2. 20M (CSV)
+
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.metrics import accuracy_score, classification_report
+
+df = pd.read_csv("diabetes.csv")
+
+x = df.drop('Outcome', axis = 1)
+
+y = df['Outcome']
+
+x_train, x_test, y_train, y_test = train_test_split(x, y, test_size = 0.2, random_state = 42)
+
+clf = DecisionTreeClassifier(random_state = 42).fit(x_train, y_train)
+
+y_pred = clf.predict(x_test)
+
+print("Accuracy:", accuracy_score(y_test, y_pred))
+
+print(classification_report(y_test, y_pred))
+
