@@ -1,0 +1,98 @@
+Q1. 10M
+
+Write a program that demonstrates the use of nice() system call. After a child process is started using fork(), assign higher priority to the child using nice() system call.
+
+#include<stdio.h>
+#include<sys/types.h>
+#include<unistd.h>
+void main()
+{
+ int pid, retnice;
+ printf("Press CTRL + C to stop process \n");
+ pid = fork();
+ for(;;)
+ {
+  if(pid==0)
+  {
+   retnice = nice(-5);
+   printf("Chlid gets higher CPU priority %d \n", retnice);
+   sleep(1);
+  }
+  else
+  {
+   retnice = nice(4);
+   printf("Parent gets lower CPU priority %d \n", retnice);
+   sleep(1);
+  }
+ }
+}
+
+
+Q2. 20M
+
+
+Write the simulation program to implement demand paging and show the page scheduling and total number of page faults for the following given page reference string. Give input n=3 as the number of memory frames.
+
+Reference String :3, 4, 5, 6, 3, 4, 7, 3, 4, 5, 6, 7, 2, 4, 6
+
+Implement FIFO
+
+#include <stdio.h>
+#define REFERENCE_STRING_LENGTH 12
+int main() 
+{
+ int n;
+ int frames[20], ref_str[25] = {3,4,5,6,3,4,7,3,4,5,6,7,2,4,6};
+ int i, j, k, page_faults = 0, next_to_replace = 0, flag;
+
+ printf("Enter number of memory frames: ");
+ scanf("%d", &n);
+
+
+ for(i = 0; i < n; i++)
+ frames[i] = -1;
+
+ printf("\nPage Reference String: ");
+ for(i = 0; i < REFERENCE_STRING_LENGTH; i++)
+ printf("%d ", ref_str[i]);
+
+ printf("\n\nPage Scheduling (FIFO):\n");
+
+ for(i = 0; i < REFERENCE_STRING_LENGTH; i++) 
+ {
+  flag = 0;
+
+  for(j = 0; j < n; j++) 
+  {
+   if(frames[j] == ref_str[i]) 
+   {
+    flag = 1;
+    break;
+   }
+  }
+
+  if(flag == 0) 
+  {
+   frames[next_to_replace] = ref_str[i];
+   next_to_replace = (next_to_replace + 1) % n;
+   page_faults++;
+  }
+
+  printf("After referencing %d: ", ref_str[i]);
+  for(k = 0; k < n; k++) 
+  {
+   if(frames[k] == -1)
+   printf(" - ");
+   else
+   printf(" %d ", frames[k]);
+  }
+  if(flag == 0)
+  printf("  (Page Fault)");
+  else
+  printf("  (Hit)");
+  printf("\n");
+ }
+ printf("\nTotal Page Faults = %d\n", page_faults);
+ return 0;
+}
+

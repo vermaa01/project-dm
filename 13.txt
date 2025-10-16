@@ -1,0 +1,213 @@
+Q1. 10M
+
+Write a program that demonstrates the use of nice() system call. After a child process is started using fork(), assign higher priority to the child using nice() system call.
+
+#include<stdio.h>
+#include<sys/types.h>
+#include<unistd.h>
+void main()
+{
+ int pid, retnice;
+ printf("Press CTRL + C to stop process \n");
+ pid = fork();
+ for(;;)
+ {
+  if(pid==0)
+  {
+   retnice = nice(-5);
+   printf("Chlid gets higher CPU priority %d \n", retnice);
+   sleep(1);
+  }
+  else
+  {
+   retnice = nice(4);
+   printf("Parent gets lower CPU priority %d \n", retnice);
+   sleep(1);
+  }
+ }
+}
+
+
+Q2. 20M
+
+Write a C program to simulate Banker’s algorithm for the purpose of deadlock avoidance.
+Consider the following snapshot of system, A, B, C and D are the resource type.
+
+#include<stdio.h>
+#include<stdbool.h>
+
+int main() {
+int P=5, R=4;
+int i,j;
+
+int need[P][R];
+
+int available[4] = {1,5,2,0};
+
+int allocation[5][4] ={
+{0,0,1,2},
+{1,0,0,0},
+{1,3,5,4},
+{0,6,3,2},
+{0,0,1,4}
+};
+
+int max[5][4] ={
+{0,0,1,2},
+{1,7,5,0},
+{2,3,5,6},
+{0,6,5,2},
+{0,6,5,6}
+};
+
+printf("\n Need matrix :\n");
+for(i=0;i<P;i++){
+for(j=0;j<R;j++) {
+need[i][j] = max[i][j] - allocation[i][j];
+printf("%d\t",need[i][j]);
+}
+printf("\n");
+}
+
+bool finish[5] = {false,false,false,false,false};
+int work[4];
+for(j=0;j<R;j++) {
+work[j] =available[j];
+}
+
+int safeSeq[5];
+int count = 0;
+
+while(count < P) {
+bool found = false;
+for(i=0;i<P;i++){
+if (!finish[i]) {
+bool canAllocate = true;
+for(j=0;j<R;j++) {
+if(need[i][j] > work[j]) {
+canAllocate = false;
+break;
+}
+}
+
+if(canAllocate) {
+for(j=0;j<R;j++) {
+work [j] += allocation[i][j];
+}
+safeSeq[count] = i;
+count++;
+finish[i] = true;
+found = true;
+}
+}
+}
+if(!found){
+break;
+}
+}
+
+if(count == P) {
+printf("\nSystem is in a SAFE state.\nSafe sequence is: ");
+for(i=0;i<P;i++) {
+printf("P%d", safeSeq[i]);
+if(i != P -1) {
+printf(" -> ");
+}
+}
+printf("\n");
+} else {
+printf("\nSystem is NOT in a safe state.\n");
+}
+
+int processID = 1;
+int request[4] = {0,4,2,0};
+
+printf("\nRequest from P%d: (0,4,2,0)\n", processID);
+
+bool canGrant = true;
+
+for(j=0;j<R;j++)  {
+if(request[j] > need[processID][j]) {
+canGrant = false ;
+break;
+}
+}
+
+if(canGrant) {
+for(j=0;j<R;j++) {
+if (request[j] > available[j]) {
+canGrant = false;
+break;
+}
+}
+}
+
+if(canGrant) {
+for(j=0;j<R;j++) {
+available[j] -= request[j];
+allocation[processID][j] += request[j];
+need[processID][j] -= request[j];
+}
+
+bool finishAfter[5] = {false,false, false, false,false};
+int workAfter[4];
+for(j=0;j<R;j++) {
+workAfter[j] = available[j];
+}
+int safeSeqAfter[5];
+int countAfter = 0;
+
+while (countAfter < P) {
+bool found = false;
+for(i=0;i<P;i++)  {
+if(!finishAfter[i]) {
+bool canAllocate = true;
+for(j=0;j<R;j++) {
+if(need[i][j] > workAfter[j]) {
+canAllocate = false;
+break;
+}
+}
+if(canAllocate) {
+for(j=0;j<R;j++) {
+workAfter[j] += allocation[i][j];
+}
+safeSeqAfter[countAfter] = i;
+countAfter++;
+finishAfter[i] = true;
+found = true;
+}
+}
+}
+if(!found) {
+break;
+}
+}
+
+
+if (countAfter == P) {
+    printf("Request can be granted immediately.\nSafe sequence after granting request: ");
+    for (i = 0; i < P; i++) {
+        printf("P%d", safeSeqAfter[i]);
+        if (i != P - 1) {
+            printf(" -> ");
+        }
+    }
+    printf("\n");
+} else {
+    printf("Request cannot be granted as it leads to unsafe state.\n");
+}
+
+
+for (j = 0; j < R; j++) {
+    available[j] += request[j];
+    allocation[processID][j] -= request[j];
+    need[processID][j] += request[j];
+}
+} else {
+    printf("Request cannot be granted immediately due to insufficient resources or exceeding needs.\n");
+}
+
+return 0;
+}
+

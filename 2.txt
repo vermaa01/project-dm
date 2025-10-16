@@ -1,0 +1,144 @@
+Q1. 10M
+
+Create a child process using fork(), display parent and child process id. Child process will display the message “Hello World” and the parent process should display “Hi”.
+
+#include<stdio.h>
+#include<sys/types.h>
+#include<unistd.h>
+void forkexample()
+{
+ if (fork() == 0)
+ {
+  printf("Hello World from child!\n");
+  printf("Child Process ID is: %d\n", getpid());
+ }
+ else if (fork() > 0)
+ {
+  printf("Hi from Parent!\n");
+  printf("Parent Process ID is: %d\n", getpid());
+ }
+}
+int main()
+{
+ forkexample();
+ return 0;
+}
+
+
+OR Q2. 20M
+
+
+Partially implement the Menu driven Banker's algorithm for accepting Allocation, Max from user.
+a) Accept Available
+b) Display Allocation, Max
+c) Find Need and display It,
+d) Display Available Consider the system with 3 resources types A,B, and C with 7,2,6 instances
+respectively.
+Consider the following snapshot:
+[20 marks]
+
+#include <stdio.h>
+
+int main() {
+    int n = 5; 
+    int m = 3; 
+    int i, j, choice;
+
+    int total[3] = {7, 2, 6};
+    int alloc[5][3] = {
+        {0, 1, 0},
+        {2, 0, 0},
+        {3, 0, 3},
+        {2, 1, 1},
+        {0, 0, 2}
+    };
+
+    int request[5][3] = {
+        {0, 0, 0},
+        {2, 0, 0},
+        {0, 0, 1},
+        {1, 0, 0},
+        {0, 0, 2}
+    };
+
+    int available[3];
+    int need[5][3];
+
+    while (1) {
+        printf("\n==== MENU ====\n");
+        printf("1. Accept Available\n");
+        printf("2. Display Allocation and Max\n");
+        printf("3. Find and Display Need Matrix\n");
+        printf("4. Display Available\n");
+        printf("5. Exit\n");
+        printf("Enter your choice: ");
+        scanf("%d", &choice);
+
+        switch (choice) {
+        case 1:
+            printf("\nEnter Available Resources (A B C): ");
+            for (i = 0; i < m; i++)
+                scanf("%d", &available[i]);
+            break;
+
+        case 2:
+            printf("\n--- Allocation Matrix ---\n");
+            for (i = 0; i < n; i++) {
+                for (j = 0; j < m; j++)
+                    printf("%d ", alloc[i][j]);
+                printf("\n");
+            }
+
+            printf("\n--- Request (Max) Matrix ---\n");
+            for (i = 0; i < n; i++) {
+                for (j = 0; j < m; j++)
+                    printf("%d ", request[i][j]);
+                printf("\n");
+            }
+            break;
+
+        case 3:
+            printf("\n--- Need Matrix ---\n");
+            for (i = 0; i < n; i++) {
+                for (j = 0; j < m; j++) {
+                    need[i][j] = request[i][j] - alloc[i][j];
+                    printf("%d ", need[i][j]);
+                }
+                printf("\n");
+            }
+            break;
+
+        case 4:
+            printf("\n--- Available Resources ---\n");
+            for (i = 0; i < m; i++)
+                printf("%d ", available[i]);
+            printf("\n");
+            break;
+
+        case 5:
+            printf("Exiting program...\n");
+            return 0;
+
+        default:
+            printf("Invalid choice. Please try again.\n");
+        }
+    }
+
+    return 0;
+}
+
+
+Inputs for the output: Refer this
+
+1) 1
+
+Enter Available Resources (A B C): 3 3 2
+
+2) 2
+
+3) 3
+
+4) 4
+
+5) 5
+

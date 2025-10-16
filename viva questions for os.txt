@@ -1,0 +1,292 @@
+Perfect 👍 Let’s go through *each point (1–30)* from your “Operating System Viva – Short & Simple Notes” in *simple language with long explanations and definitions* so you can easily understand and remember them for viva or theory exams.
+
+---
+
+### *1. Process*
+
+*Definition:*
+A process is a program that is currently being executed by the CPU.
+*Explanation:*
+When we write a program (like in C or Java), it just sits in storage until we run it. When it starts executing, it becomes a *process*. A process has its own memory, variables, and CPU time. For example, when you open a web browser, it becomes a running process.
+*Example:* Running “Chrome.exe” in your system.
+
+---
+
+### *2. Thread*
+
+*Definition:*
+A thread is the smallest unit of a process that can be executed independently.
+*Explanation:*
+A single process can have many threads working together. Threads share the same memory and resources but execute different parts of the code at the same time. This increases speed.
+*Example:* In Chrome, multiple tabs run as different threads inside the same process.
+
+---
+
+### *3. Operating System (OS)*
+
+*Definition:*
+An operating system is system software that manages computer hardware, software resources, and provides services to users.
+*Explanation:*
+It acts as a bridge between the user and hardware. Without an OS, you can’t run applications. It manages memory, processes, input/output, and files.
+*Example:* Windows, Linux, macOS, Android.
+
+---
+
+### *4. Kernel*
+
+*Definition:*
+The kernel is the core part of the operating system that directly controls the hardware.
+*Explanation:*
+It manages system resources like CPU, memory, and devices. It is loaded into memory when the computer starts.
+*Example:* Linux kernel, Windows NT kernel.
+
+---
+
+### *5. Process vs Program*
+
+*Program:* A set of instructions written in a file stored on disk.
+*Process:* A program in execution (active state).
+*Explanation:*
+A program becomes a process when it starts running. A process needs memory, CPU, and resources; a program does not.
+*Example:* “Notepad.exe” (program) becomes a process when you open it.
+
+---
+
+### *6. CPU Scheduling*
+
+*Definition:*
+CPU scheduling is the process of deciding which process will use the CPU next.
+*Explanation:*
+When multiple processes are ready, the OS decides the order in which they run using scheduling algorithms. This helps improve CPU utilization.
+
+---
+
+### *7. Context Switching*
+
+*Definition:*
+Switching the CPU from one process to another.
+*Explanation:*
+When the CPU changes from one process to another, it must save the current process’s state and load the next process’s state. This allows multiple processes to share the CPU effectively.
+
+---
+
+### *8. System Call*
+
+*Definition:*
+A system call is a way for programs to request services from the operating system.
+*Explanation:*
+User programs can’t directly access hardware. So they make system calls to ask the OS to perform tasks like reading files or printing data.
+*Example:* read(), write(), open() in Linux.
+
+---
+
+### *9. File*
+
+*Definition:*
+A file is a collection of data stored on a disk under a name.
+*Explanation:*
+Files are used to store information permanently, such as text, images, or programs. The OS manages file creation, reading, and deletion.
+
+---
+
+### *10. Deadlock*
+
+*Definition:*
+A deadlock occurs when two or more processes wait forever for each other to release resources.
+*Explanation:*
+For example, Process A is holding Resource 1 and waiting for Resource 2, while Process B has Resource 2 and waits for Resource 1. Both get stuck forever.
+
+---
+
+### *11. Deadlock Conditions*
+
+Four conditions must hold for deadlock to occur:
+
+1. *Mutual exclusion:* Resource held by one process only.
+2. *Hold and wait:* Process holds one resource and waits for another.
+3. *No preemption:* Resources cannot be forcibly taken.
+4. *Circular wait:* Each process waits for a resource held by the next one in a circle.
+
+---
+
+### *12. Virtual Memory*
+
+*Definition:*
+Virtual memory is a technique that uses part of the hard disk as if it were RAM.
+*Explanation:*
+It allows the system to run larger programs than the available physical memory. Pages of memory are swapped between RAM and disk as needed.
+
+---
+
+### *13. Paging*
+
+*Definition:*
+Paging divides memory into fixed-size blocks called pages.
+*Explanation:*
+This helps manage memory efficiently and avoids external fragmentation. Logical memory and physical memory are both divided into equal pages.
+
+---
+
+### *14. Segmentation*
+
+*Definition:*
+Segmentation divides memory into variable-sized parts called segments (like code, data, stack).
+*Explanation:*
+It makes memory allocation logical because programs are naturally divided into sections. Unlike paging, segments are not of fixed size.
+
+---
+
+### *15. Demand Paging*
+
+*Definition:*
+Pages are loaded into memory only when needed.
+*Explanation:*
+This saves memory because only required parts of a program are loaded, not the entire program.
+*Example:* When you open a large app, not all data is loaded at once.
+
+---
+
+### *16. Scheduler*
+            
+*Definition:*
+A scheduler decides which process should be executed next by the CPU.
+*Explanation:*
+It ensures all processes get fair CPU time and system runs efficiently.
+
+---
+
+### *17. Types of Scheduler*
+
+1. *Long-term:* Decides which processes enter memory.
+2. *Short-term:* Decides which ready process runs next.
+3. *Medium-term:* Suspends or resumes processes to control memory load.
+
+---
+
+### *18. FCFS (First Come First Serve)*
+
+*Definition:*
+The process that arrives first is executed first.
+*Explanation:*
+It is simple but can cause delays for small jobs if a long job comes first (called convoy effect).
+
+---
+
+### *19. SJF (Shortest Job First)*
+
+*Definition:*
+The process with the smallest execution time is executed first.
+*Explanation:*
+It minimizes average waiting time but requires knowledge of process length in advance.
+
+---
+
+### *20. Priority Scheduling*
+
+*Definition:*
+The process with the highest priority is executed first.
+*Explanation:*
+Each process is assigned a priority number; higher priority means faster execution.
+*Problem:* Low-priority processes may starve (never get CPU).
+
+---
+
+### *21. Round Robin*
+
+*Definition:*
+Each process gets equal CPU time in a cyclic order.
+*Explanation:*
+It is fair and mainly used in time-sharing systems. Every process gets a small time quantum (e.g., 10ms).
+
+---
+
+### *22. Semaphore*
+
+*Definition:*
+A semaphore is a variable used to control access to shared resources.
+*Explanation:*
+It helps prevent race conditions where two processes try to use the same resource simultaneously.
+*Example:* Used in printers or databases to manage access.
+
+---
+
+### *23. IPC (Inter-Process Communication)*
+
+*Definition:*
+A mechanism that allows processes to communicate and share data.
+*Explanation:*
+It can be done using message passing or shared memory.
+*Example:* One process sending data to another in a client-server system.
+
+---
+
+### *24. Shell*
+
+*Definition:*
+A shell is an interface between the user and the operating system.
+*Explanation:*
+It allows the user to give commands to the OS. It can be command-line (like Bash) or graphical (like Windows Explorer).
+
+---
+
+### *25. Multitasking*
+
+*Definition:*
+Running more than one process at the same time.
+*Explanation:*
+The CPU quickly switches between tasks, giving the illusion that all are running simultaneously.
+*Example:* Listening to music while browsing the web.
+
+---
+
+### *26. Multiprogramming*
+
+*Definition:*
+Multiple programs are kept in memory to use CPU efficiently.
+*Explanation:*
+When one program waits for I/O, another can use the CPU. This increases CPU utilization.
+
+---
+
+### *27. Spooling*
+
+*Definition:*
+Simultaneous Peripheral Operation On-Line – temporary data storage for devices.
+*Explanation:*
+Used when devices like printers can handle only one job at a time. The OS stores jobs in a queue until the device is ready.
+
+---
+
+### *28. Fragmentation*
+
+*Definition:*
+Memory space that is wasted due to improper allocation.
+*Explanation:*
+Two types:
+
+* *Internal:* Unused space within a block.
+* *External:* Free spaces scattered across memory.
+
+---
+
+### *29. Booting*
+
+*Definition:*
+The process of starting a computer and loading the operating system into memory.
+*Explanation:*
+It includes POST (Power-On Self Test), loading of the bootloader, and then the kernel.
+*Example:* When you press the power button and Windows starts.
+
+---
+
+### *30. Device Driver*
+
+*Definition:*
+Software that helps the operating system communicate with hardware devices.
+*Explanation:*
+Without drivers, the OS cannot use devices like printers, keyboards, or graphics cards.
+*Example:* Printer driver, sound card driver.
+
+---
+
+Would you like me to create this same content in a *PDF file* (for printing or study revision)?
